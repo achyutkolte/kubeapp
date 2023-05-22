@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
-maetadata:
+metadata:
     name: vprodb
     labels:
       app: vprodb
 spec:
   selector:
-     matchlabels:
+     matchLabels:
        app: vprodb
   replicas: 1
 
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: vprodb
-          image: vprofile/vprofiledb
+          image: vprofile/vprofiledb:V1
           args:
             - "--Ignore-db-dir=lost+found"
           volumeMounts:
@@ -34,7 +34,7 @@ spec:
                   - name: app-secret
                     key: db-pass
       nodeSelector:
-        zone:
+        zone: ap-south-1a
       volumes:
         - name: vpro-db-data
           awsElasticBlockStore:
